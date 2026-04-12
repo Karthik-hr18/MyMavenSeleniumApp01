@@ -1,44 +1,40 @@
+```groovy
 pipeline {
-agent any
-tools {
-    maven 'Maven'
-}
+    agent any
 
-environment {
-    // Optional: set display for headless execution
-    DISPLAY = ':99'
-}
+    tools {
+        maven 'Maven'
+    }
 
-stages {
+    stages {
 
-    stage('Checkout') {
-        steps {
-            git branch: 'master', url: 'https://github.com/Karthik-hr18/MyMavenSeleniumApp01'
+        stage('Checkout') {
+            steps {
+                git branch: 'master', url: 'https://github.com/Karthik-hr18/MyMavenSeleniumApp01'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
+
+        stage('Run Selenium') {
+            steps {
+                sh 'java -jar target/MyMavenSeleniumApp01-1.0-SNAPSHOT.jar'
+            }
+        }
+
+    }
+
+    post {
+        success {
+            echo 'Selenium executed successfully ✅'
+        }
+        failure {
+            echo 'Build failed ❌'
         }
     }
-
-    stage('Build') {
-        steps {
-            sh 'mvn clean compile'
-        }
-    }
-
-    stage('Test (Selenium)') {
-        steps {
-            // Run tests in headless mode
-            sh 'mvn test -Dheadless=true'
-        }
-    }
-
 }
-
-post {
-    success {
-        echo 'Selenium tests passed ✅'
-    }
-    failure {
-        echo 'Selenium tests failed ❌'
-    }
-}
-
-}
+```
