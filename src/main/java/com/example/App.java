@@ -1,4 +1,4 @@
-```java
+
 package com.example;
 
 import org.openqa.selenium.By;
@@ -29,4 +29,3 @@ public class App {
         driver.quit(); // ✅ very important
     }
 }
-```
