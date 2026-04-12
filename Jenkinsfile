@@ -1,4 +1,4 @@
-
+```groovy
 pipeline {
     agent any
 
@@ -10,7 +10,7 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                git branch: 'master', url: 'https://github.com/Karthik-hr18/MyMavenSeleniumApp01'
+                git branch: 'master', url: 'https://github.com/Karthik-hr18/MyMavenSeleniumApp01.git'
             }
         }
 
@@ -37,3 +37,4 @@ pipeline {
         }
     }
 }
+```
